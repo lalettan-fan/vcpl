@@ -6,7 +6,7 @@ from .helper.vc_manager import CatVC
 from .helper.stream_helper import Stream
 
 
-plugin_category = "misc"
+plugin_category = "extra"
 
 catub.__class__.__module__ = 'telethon.client.telegramclient'
 vc_player = CatVC(catub)
@@ -23,7 +23,7 @@ async def handler(_, update):
     pattern="joinvc ?(\S+)? ?(?:-as)? ?(\S+)?",
     command=("joinvc", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Join command",
         "usage": "{tr}ded <text>",
     },
 )
@@ -63,7 +63,7 @@ async def joinVoicechat(event):
     pattern="leavevc",
     command=("leavevc", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Leave command",
         "usage": "{tr}ded <text>",
     },
 )
@@ -82,7 +82,7 @@ async def leaveVoicechat(event):
     pattern="playf ?(-a)? ?(\S*)?",
     command=("playf", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Force Play",
         "usage": "{tr}ded <text>",
     },
 )
@@ -110,7 +110,7 @@ async def playf_stream(event):
     pattern="play ?(-a)? ?(\S*)?",
     command=("play", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Play",
         "usage": "{tr}ded <text>",
     },
 )
@@ -138,7 +138,7 @@ async def play_stream(event):
     pattern="pause",
     command=("pause", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Pause stream",
         "usage": "{tr}ded <text>",
     },
 )
@@ -153,7 +153,7 @@ async def pause_stream(event):
     pattern="resume",
     command=("resume", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Resume Stream",
         "usage": "{tr}ded <text>",
     },
 )
@@ -168,7 +168,7 @@ async def pause_stream(event):
     pattern="mutevc",
     command=("mutevc", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Mute VC",
         "usage": "{tr}ded <text>",
     },
 )
@@ -183,7 +183,7 @@ async def pause_stream(event):
     pattern="unmutevc",
     command=("unmutevc", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Unmute VC",
         "usage": "{tr}ded <text>",
     },
 )
@@ -198,7 +198,7 @@ async def pause_stream(event):
     pattern="skip",
     command=("skip", plugin_category),
     info={
-        "header": "Just a art command try out yourself to see",
+        "header": "Skip VC",
         "usage": "{tr}ded <text>",
     },
 )
