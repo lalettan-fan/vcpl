@@ -9,6 +9,7 @@ from .helper.stream_helper import Stream
 plugin_category = "extra"
 
 catub.__class__.__module__ = 'telethon.client.telegramclient'
+
 vc_player = CatVC(catub)
 
 asyncio.create_task(vc_player.start())
@@ -23,8 +24,10 @@ async def handler(_, update):
     pattern="joinvc ?(\S+)? ?(?:-as)? ?(\S+)?",
     command=("joinvc", plugin_category),
     info={
-        "header": "Join command",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def joinVoicechat(event):
@@ -63,8 +66,10 @@ async def joinVoicechat(event):
     pattern="leavevc",
     command=("leavevc", plugin_category),
     info={
-        "header": "Leave command",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def leaveVoicechat(event):
@@ -82,8 +87,10 @@ async def leaveVoicechat(event):
     pattern="playf ?(-a)? ?(\S*)?",
     command=("playf", plugin_category),
     info={
-        "header": "Force Play",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def playf_stream(event):
@@ -110,8 +117,10 @@ async def playf_stream(event):
     pattern="play ?(-a)? ?(\S*)?",
     command=("play", plugin_category),
     info={
-        "header": "Play",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def play_stream(event):
@@ -138,8 +147,10 @@ async def play_stream(event):
     pattern="pause",
     command=("pause", plugin_category),
     info={
-        "header": "Pause stream",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def pause_stream(event):
@@ -153,8 +164,10 @@ async def pause_stream(event):
     pattern="resume",
     command=("resume", plugin_category),
     info={
-        "header": "Resume Stream",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def pause_stream(event):
@@ -168,8 +181,10 @@ async def pause_stream(event):
     pattern="mutevc",
     command=("mutevc", plugin_category),
     info={
-        "header": "Mute VC",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def pause_stream(event):
@@ -183,8 +198,10 @@ async def pause_stream(event):
     pattern="unmutevc",
     command=("unmutevc", plugin_category),
     info={
-        "header": "Unmute VC",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def pause_stream(event):
@@ -198,8 +215,10 @@ async def pause_stream(event):
     pattern="skip",
     command=("skip", plugin_category),
     info={
-        "header": "Skip VC",
-        "usage": "{tr}ded <text>",
+        "header": "To get lastest Firmware.",
+        "description": "Works for Xiaomeme devices only",
+        "usage": "{tr}firmware <codename>",
+        "examples": "{tr}firmware whyred",
     },
 )
 async def pause_stream(event):
