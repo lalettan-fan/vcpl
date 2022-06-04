@@ -1,9 +1,9 @@
 from userbot.helpers.utils import install_pip
 try:
-	from pytgcalls import PyTgCalls, StreamType
+    from pytgcalls import PyTgCalls, StreamType
 except:
-	install_pip("py-tgcalls")
-	from pytgcalls import PyTgCalls, StreamType
+    install_pip("py-tgcalls")
+    from pytgcalls import PyTgCalls, StreamType
 
 from pytgcalls.types import AudioPiped, AudioVideoPiped
 from pytgcalls.types.stream import StreamAudioEnded
@@ -181,18 +181,18 @@ class CatVC:
             self.PAUSED = False
         return f"Resumed Stream on {self.CHAT_NAME}"
 
-    async def mute(self):
-        if not self.PLAYING:
-            return "Nothing is playing to Mute"
-        if not self.MUTED:
-            await self.app.mute_stream(self.CHAT_ID)
-            self.PAUSED = True
-        return f"Muted Stream on {self.CHAT_NAME}"
+    # async def mute(self):
+    #     if not self.PLAYING:
+    #         return "Nothing is playing to Mute"
+    #     if not self.MUTED:
+    #         await self.app.mute_stream(self.CHAT_ID)
+    #         self.PAUSED = True
+    #     return f"Muted Stream on {self.CHAT_NAME}"
 
-    async def unmute(self):
-        if not self.PLAYING:
-            return "Nothing is playing to Unmute"
-        if self.MUTED:
-            await self.app.unmute_stream(self.CHAT_ID)
-            self.MUTED = False
-        return f"Unmuted Stream on {self.CHAT_NAME}"
+    # async def unmute(self):
+    #     if not self.PLAYING:
+    #         return "Nothing is playing to Unmute"
+    #     if self.MUTED:
+    #         await self.app.unmute_stream(self.CHAT_ID)
+    #         self.MUTED = False
+    #     return f"Unmuted Stream on {self.CHAT_NAME}"
