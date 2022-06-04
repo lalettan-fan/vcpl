@@ -1,1 +1,1 @@
-py-tgcalls
+git+https://github.com/pytgcalls/pytgcalls
