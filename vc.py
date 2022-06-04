@@ -100,6 +100,35 @@ async def leaveVoicechat(event):
     else:
         await edit_delete(event, "Not yet joined any VC")
 
+@catub.cat_cmd(
+    pattern="playlist",
+    command=("playlist", plugin_category),
+    info={
+        "header": "To Get all playlist.",
+        "description": "To Get all playlist for Voice Chat.",
+        "usage": [
+            "{tr}playlist",
+        ],
+        "examples": [
+            "{tr}playlist",
+        ],
+    },
+)
+async def get_playlist(event):
+    "To Get all playlist for Voice Chat."
+    await edit_or_reply(event, 'Fetching Playlist ......')
+    playl = vc_player.PLAYLIST
+    if not playl:
+        await edit_delete(event,"Playlist empty",time=10)
+    else:
+        cat = ""
+        for num,item in enumerate(playl,1):
+            if item['stream'] == Stream.audio:
+                cat += f"{num}. 🔉  `{item['title']}`\n"
+            else:
+                cat += f"{num}. 📺  `{item['title']}`\n"
+        await edit_delete(event,f"**Playlist:**\n\n{cat}\n**Enjoy the show**")
+
 
 @catub.cat_cmd(
     pattern="playf ?(-a)? ?(\S*)?",
@@ -288,33 +317,3 @@ async def skip_stream(event):
     await edit_or_reply(event, 'Skiping Stream ......')
     res = await vc_player.skip()
     await edit_delete(event, res, time=30)
-
-
-@catub.cat_cmd(
-    pattern="playlist",
-    command=("playlist", plugin_category),
-    info={
-        "header": "To Get all playlist.",
-        "description": "To Get all playlist for Voice Chat.",
-        "usage": [
-            "{tr}playlist",
-        ],
-        "examples": [
-            "{tr}playlist",
-        ],
-    },
-)
-async def get_playlist(event):
-    "To Get all playlist for Voice Chat."
-    await edit_or_reply(event, 'Fetching Playlist ......')
-    playl = vc_player.PLAYLIST
-    if not playl:
-        await edit_delete(event,"Playlist empty",time=10)
-    else:
-        cat = ""
-        for num,item in enumerate(playl,1):
-            if item['stream'] == Stream.audio:
-                cat += f"{num}. 🔉  `{item['title']}`\n"
-            else:
-                cat += f"{num}. 📺  `{item['title']}`\n"
-        await edit_delete(event,f"**Playlist:**\n\n{cat}\n**Enjoy the show**")
