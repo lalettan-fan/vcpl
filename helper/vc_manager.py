@@ -1,4 +1,10 @@
-from pytgcalls import PyTgCalls, StreamType
+from userbot.helpers.utils import install_pip
+try:
+	from pytgcalls import PyTgCalls, StreamType
+except:
+	install_pip("py-tgcalls")
+	from pytgcalls import PyTgCalls, StreamType
+
 from pytgcalls.types import AudioPiped, AudioVideoPiped
 from pytgcalls.types.stream import StreamAudioEnded
 from telethon import functions, types
