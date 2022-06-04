@@ -31,12 +31,12 @@ class CatVC:
         if join_as:
             try:
                 join_as_chat = await self.client.get_entity(int(join_as))
-                join_as = f" as **{join_as_chat.title}**"
+                join_as_title = f" as **{join_as_chat.title}**"
             except ValueError:
                 return "Give Chat Id for joining as"
         else:
             join_as_chat = await self.client.get_me()
-            join_as = ""
+            join_as_title = ""
         try:
             await self.app.join_group_call(
                 chat_id=chat.id,
@@ -63,7 +63,7 @@ class CatVC:
             await self.join_vc(chat=chat, join_as=join_as)
         self.CHAT_ID = chat.id
         self.CHAT_NAME = chat.title
-        return f"Joined VC of **{chat.title}**{join_as}"
+        return f"Joined VC of **{chat.title}**{join_as_title}"
 
     async def leave_vc(self):
         try:

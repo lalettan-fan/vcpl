@@ -21,8 +21,14 @@ async def handler(_, update):
 
 @catub.cat_cmd(
     pattern="joinvc ?(\S+)? ?(?:-as)? ?(\S+)?",
+    command=("joinvc", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def joinVoicechat(event):
+    "Join command"
     chat = event.pattern_match.group(1)
     joinas = event.pattern_match.group(2)
 
@@ -55,8 +61,14 @@ async def joinVoicechat(event):
 
 @catub.cat_cmd(
     pattern="leavevc",
+    command=("leavevc", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def leaveVoicechat(event):
+    "Leave command"
     if vc_player.CHAT_ID:
         await edit_or_reply(event, 'Leaving VC ......')
         chat_name = vc_player.CHAT_NAME
@@ -68,8 +80,14 @@ async def leaveVoicechat(event):
 
 @catub.cat_cmd(
     pattern="playf ?(-a)? ?(\S*)?",
+    command=("playf", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def playf_stream(event):
+    "Force Play"
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     if input_str == '' and event.reply_to_msg_id:
@@ -90,8 +108,14 @@ async def playf_stream(event):
 
 @catub.cat_cmd(
     pattern="play ?(-a)? ?(\S*)?",
+    command=("play", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def play_stream(event):
+    "Play"
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     if input_str == '' and event.reply_to_msg_id:
@@ -112,8 +136,14 @@ async def play_stream(event):
 
 @catub.cat_cmd(
     pattern="pause",
+    command=("pause", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def pause_stream(event):
+    "Pause stream"
     await edit_or_reply(event, 'Pausing VC ......')
     res = await vc_player.pause()
     await edit_delete(event, res)
@@ -121,8 +151,14 @@ async def pause_stream(event):
 
 @catub.cat_cmd(
     pattern="resume",
+    command=("resume", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def pause_stream(event):
+    "Resume Stream"
     await edit_or_reply(event, 'Resuming VC ......')
     res = await vc_player.resume()
     await edit_delete(event, res)
@@ -130,8 +166,14 @@ async def pause_stream(event):
 
 @catub.cat_cmd(
     pattern="mutevc",
+    command=("mutevc", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def pause_stream(event):
+    "Mute VC"
     await edit_or_reply(event, 'Muting VC ......')
     res = await vc_player.mute()
     await edit_delete(event, res)
@@ -139,8 +181,14 @@ async def pause_stream(event):
 
 @catub.cat_cmd(
     pattern="unmutevc",
+    command=("unmutevc", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def pause_stream(event):
+    "Unmute VC"
     await edit_or_reply(event, 'Unmuting VC ......')
     res = await vc_player.unmute()
     await edit_delete(event, res)
@@ -148,8 +196,14 @@ async def pause_stream(event):
 
 @catub.cat_cmd(
     pattern="skip",
+    command=("skip", plugin_category),
+    info={
+        "header": "Just a art command try out yourself to see",
+        "usage": "{tr}ded <text>",
+    },
 )
 async def pause_stream(event):
+    "Skip VC"
     await edit_or_reply(event, 'Skiping Stream ......')
     res = await vc_player.skip()
     await edit_delete(event, res)
