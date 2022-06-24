@@ -1,9 +1,11 @@
+from pytgcalls.binding import time
 from telethon.tl.types import User
 from userbot import catub
 import asyncio
 from userbot.core.managers import edit_delete, edit_or_reply
 from .helper.vc_manager import CatVC
 from .helper.stream_helper import Stream
+from .helper.tg_downloader import tg_dl
 
 
 plugin_category = "extra"
@@ -100,6 +102,7 @@ async def leaveVoicechat(event):
     else:
         await edit_delete(event, "Not yet joined any VC")
 
+
 @catub.cat_cmd(
     pattern="playlist",
     command=("playlist", plugin_category),
@@ -119,97 +122,97 @@ async def get_playlist(event):
     await edit_or_reply(event, 'Fetching Playlist ......')
     playl = vc_player.PLAYLIST
     if not playl:
-        await edit_delete(event,"Playlist empty",time=10)
+        await edit_delete(event, "Playlist empty", time=10)
     else:
         cat = ""
-        for num,item in enumerate(playl,1):
+        for num, item in enumerate(playl, 1):
             if item['stream'] == Stream.audio:
                 cat += f"{num}. 🔉  `{item['title']}`\n"
             else:
                 cat += f"{num}. 📺  `{item['title']}`\n"
-        await edit_delete(event,f"**Playlist:**\n\n{cat}\n**Enjoy the show**")
+        await edit_delete(event, f"**Playlist:**\n\n{cat}\n**Enjoy the show**")
 
 
 @catub.cat_cmd(
-    pattern="playf ?(-a)? ?(\S*)?",
-    command=("playf", plugin_category),
+    pattern="vplay ?(-f)? ?([\S ]*)?",
+    command=("vplay", plugin_category),
     info={
-        "header": "To forcefully play a stream(audio/video) on VC.",
-        "description": "To forcefully play a stream(audio/video) on VC. By Default plays as video",
-        "note": "Using this commands stops current playing stream and plays the provided one",
+        "header": "To Play a media as video on VC.",
+        "description": "To play a video stream on VC.",
         "flags": {
-            "-a": "To play as audio only",
+            "-f": "Force play the Video",
         },
         "usage": [
-            "{tr}playf (reply to message)",
-            "{tr}playf (yt link)",
-            "{tr}playf -a (yt link)",
+            "{tr}vplay (reply to message)",
+            "{tr}vplay (yt link)",
+            "{tr}vplay -f (yt link)",
         ],
         "examples": [
-            "{tr}playf",
-            "{tr}playf https://www.youtube.com/watch?v=c05GBLT_Ds0",
-            "{tr}playf -a https://www.youtube.com/watch?v=c05GBLT_Ds0",
+            "{tr}vplay",
+            "{tr}vplay https://www.youtube.com/watch?v=c05GBLT_Ds0",
+            "{tr}vplay -f https://www.youtube.com/watch?v=c05GBLT_Ds0",
         ],
     },
 )
-async def playf_stream(event):
-    "To forcefully play a stream(audio/video) on VC."
+async def play_video(event):
+    "To Play a media as video on VC."
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     if input_str == '' and event.reply_to_msg_id:
-        reply_message = await event.get_reply_message()
-        input_str = reply_message.text
-    await edit_or_reply(event, 'Playing in VC ......')
+        input_str = tg_dl(event)
+    if not input_str:
+        return await edit_delete(event, "Please Provide a media file to stream on VC", time=20)
     if not vc_player.CHAT_ID:
         return await edit_or_reply(event, 'Join a VC and use play command')
     if not input_str:
         return await edit_or_reply(event, 'No Input to play in vc')
+    await edit_or_reply(event, 'Playing in VC ......')
     if flag:
-        resp = await vc_player.play_song(input_str, force=True)
-    else:
         resp = await vc_player.play_song(input_str, Stream.video, force=True)
+    else:
+        resp = await vc_player.play_song(input_str, Stream.video, force=False)
     if resp:
         await edit_delete(event, resp, time=30)
 
 
 @catub.cat_cmd(
-    pattern="play ?(-a)? ?(\S*)?",
+    pattern="play ?(-f)? ?([\S ]*)?",
     command=("play", plugin_category),
     info={
-        "header": "To play a stream(audio/video) on VC.",
-        "description": "To play a stream(audio/video) on VC. By Default plays as video",
-        "note": "Using this commands adds to playlist if something is already playing",
+        "header": "To Play a media as audio on VC.",
+        "description": "To play a audio stream on VC.",
         "flags": {
-            "-a": "To play as audio only",
+            "-f": "Force play the Audio",
         },
         "usage": [
             "{tr}play (reply to message)",
             "{tr}play (yt link)",
-            "{tr}play -a (yt link)",
+            "{tr}play -f (yt link)",
         ],
         "examples": [
             "{tr}play",
             "{tr}play https://www.youtube.com/watch?v=c05GBLT_Ds0",
-            "{tr}play -a https://www.youtube.com/watch?v=c05GBLT_Ds0",
+            "{tr}play -f https://www.youtube.com/watch?v=c05GBLT_Ds0",
         ],
     },
 )
-async def play_stream(event):
-    "To play a stream(audio/video) on VC."
+async def play_audio(event):
+    "To Play a media as audio on VC."
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     if input_str == '' and event.reply_to_msg_id:
-        reply_message = await event.get_reply_message()
-        input_str = reply_message.text
-    await edit_or_reply(event, 'Playing in VC ......')
+        input_str = tg_dl(event)
+    if not input_str:
+        return await edit_delete(event, "Please Provide a media file to stream on VC", time=20)
     if not vc_player.CHAT_ID:
         return await edit_or_reply(event, 'Join a VC and use play command')
     if not input_str:
         return await edit_or_reply(event, 'No Input to play in vc')
+    await edit_or_reply(event, 'Playing in VC ......')
     if flag:
-        resp = await vc_player.play_song(input_str)
+        resp = await vc_player.play_song(input_str, Stream.audio, force=True)
     else:
-        resp = await vc_player.play_song(input_str, Stream.video)
+        resp = await vc_player.play_song(input_str, Stream.audio, force=False)
     if resp:
         await edit_delete(event, resp, time=30)
 
